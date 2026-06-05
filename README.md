@@ -35,12 +35,18 @@ Create `.env.local` from `.env.example`:
 ```bash
 BETTER_AUTH_SECRET=replace-with-a-32-character-or-longer-secret
 BETTER_AUTH_URL=http://localhost:3000
+BETTER_AUTH_TRUSTED_ORIGINS=http://localhost:3000,https://sun-cart-orpin.vercel.app
 SQLITE_DB_PATH=./suncart.sqlite
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 ```
 
-Google login requires valid `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`. Email/password auth works with the local SQLite database.
+Google login requires valid `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`. In Google Cloud, add these OAuth values:
+
+- Authorized JavaScript origin: `https://sun-cart-orpin.vercel.app`
+- Authorized redirect URI: `https://sun-cart-orpin.vercel.app/api/auth/callback/google`
+
+On Vercel, set `BETTER_AUTH_URL` to `https://sun-cart-orpin.vercel.app`. Email/password auth works with the local SQLite database.
 
 ## Getting Started
 

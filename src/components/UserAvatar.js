@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Image from "next/image";
+import { useState } from "react";
 import { UserRound } from "lucide-react";
 import { getDisplayImageUrl } from "@/lib/images";
 
@@ -16,26 +17,25 @@ const iconSizes = {
 
 export default function UserAvatar({ image, name, size = "sm", className = "" }) {
   const src = getDisplayImageUrl(image);
-  const [imageFailed, setImageFailed] = useState(false);
+  const [failedSrc, setFailedSrc] = useState("");
   const avatarSize = sizeClasses[size] || sizeClasses.sm;
   const iconSize = iconSizes[size] || iconSizes.sm;
-  const showImage = src && !imageFailed;
-
-  useEffect(() => {
-    setImageFailed(false);
-  }, [src]);
+  const showImage = src && failedSrc !== src;
 
   return (
     <span
-      className={`grid ${avatarSize} shrink-0 place-items-center overflow-hidden rounded-full bg-secondary text-secondary-content ${className}`}
+      className={`relative grid ${avatarSize} shrink-0 place-items-center overflow-hidden rounded-full bg-secondary text-secondary-content ${className}`}
     >
       {showImage ? (
-        <img
+        <Image
           src={src}
           alt={name ? `${name} profile picture` : "Profile picture"}
-          className="h-full w-full object-cover"
+          fill
+          sizes={size === "lg" ? "7rem" : "2.25rem"}
+          className="object-cover"
           referrerPolicy="no-referrer"
-          onError={() => setImageFailed(true)}
+          unoptimized
+          onError={() => setFailedSrc(src)}
         />
       ) : (
         <UserRound size={iconSize} />
