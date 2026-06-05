@@ -1,41 +1,31 @@
 import { betterAuth } from "better-auth";
 import { nextCookies } from "better-auth/next-js";
 import Database from "better-sqlite3";
+import {
+  getAppURL,
+  getGoogleClientId,
+  getGoogleClientSecret,
+  getSqlitePath,
+  getTrustedOrigins,
+} from "@/lib/auth-env";
 
-const productionURL = "https://sun-cart-orpin.vercel.app";
-const localURL = "http://localhost:3000";
-const vercelURL = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "";
-const appURL =
-  process.env.BETTER_AUTH_URL ||
-  vercelURL ||
-  (process.env.NODE_ENV === "production" ? productionURL : localURL);
-const trustedOrigins = [appURL, productionURL, localURL]
-  .map((url) => {
-    try {
-      return new URL(url).origin;
-    } catch {
-      return "";
-    }
-  })
-  .filter(Boolean);
-
-const database = new Database(process.env.SQLITE_DB_PATH || "./suncart.sqlite");
+const database = new Database(getSqlitePath());
+const googleClientId = getGoogleClientId();
+const googleClientSecret = getGoogleClientSecret();
 
 const googleCredentials =
-  process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+  googleClientId && googleClientSecret
     ? {
         google: {
-          clientId: process.env.GOOGLE_CLIENT_ID,
-          clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+          clientId: googleClientId,
+          clientSecret: googleClientSecret,
         },
       }
     : {};
 
 export const authOptions = {
-  baseURL: appURL,
-  trustedOrigins: Array.from(new Set(trustedOrigins)),
+  baseURL: getAppURL(),
+  trustedOrigins: getTrustedOrigins(),
   database,
   emailAndPassword: {
     enabled: true,
@@ -49,5 +39,13 @@ export const authOptions = {
   },
   plugins: [nextCookies()],
 };
+
+if (process.env.VERCEL) {
+  const { getMigrations } = await import(
+    "../../node_modules/better-auth/dist/db/get-migration.mjs"
+  );
+  const migrations = await getMigrations(authOptions);
+  await migrations.runMigrations();
+}
 
 export const auth = betterAuth(authOptions);

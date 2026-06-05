@@ -48,6 +48,18 @@ Google login requires valid `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`. In Go
 
 On Vercel, set `BETTER_AUTH_URL` to `https://sun-cart-orpin.vercel.app`. Email/password auth works with the local SQLite database.
 
+You can verify deployed auth configuration without exposing secrets at:
+
+```text
+https://sun-cart-orpin.vercel.app/api/auth/status
+```
+
+All three secret checks should return `true`: `betterAuthSecret`, `googleClientId`, and `googleClientSecret`.
+
+On Vercel, this demo uses `/tmp/suncart.sqlite` and runs Better Auth migrations on cold start. That is useful for testing Google login, but it is not durable production storage. For real users, move auth storage to a hosted database such as Neon, Supabase, Vercel Postgres, or Turso.
+
+Do not set `SQLITE_DB_PATH=./suncart.sqlite` on Vercel. Serverless functions cannot write to the deployment directory. If you set `SQLITE_DB_PATH` on Vercel at all, it must be a `/tmp/...` path.
+
 ## Getting Started
 
 ```bash

@@ -7,6 +7,13 @@ import { Globe, LogIn } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import ToastMessage from "@/components/ToastMessage";
 
+function getGoogleLoginErrorMessage(error) {
+  return (
+    error?.message ||
+    "Google login failed. Check /api/auth/status and Vercel environment variables."
+  );
+}
+
 export default function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -57,7 +64,7 @@ export default function LoginForm() {
     if (error) {
       setPending(false);
       setMessageType("error");
-      setMessage(error.message || "Google login is not configured yet.");
+      setMessage(getGoogleLoginErrorMessage(error));
     }
   }
 
