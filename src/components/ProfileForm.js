@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Save } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { getDisplayImageUrl } from "@/lib/images";
 import ToastMessage from "@/components/ToastMessage";
 
 export default function ProfileForm({ user }) {
@@ -21,7 +22,7 @@ export default function ProfileForm({ user }) {
 
     const { error } = await authClient.updateUser({
       name,
-      image,
+      image: getDisplayImageUrl(image),
     });
 
     setPending(false);

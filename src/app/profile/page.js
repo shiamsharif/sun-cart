@@ -1,7 +1,8 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { Mail, UserRound } from "lucide-react";
+import { Mail } from "lucide-react";
 import ProfileForm from "@/components/ProfileForm";
+import UserAvatar from "@/components/UserAvatar";
 import { auth } from "@/lib/auth";
 
 export const runtime = "nodejs";
@@ -24,13 +25,12 @@ export default async function ProfilePage() {
     <section className="summer-shell py-12">
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <aside className="summer-card rounded-box p-6 md:p-8">
-          <div
-            className="grid size-28 place-items-center rounded-full bg-secondary bg-cover bg-center text-secondary-content shadow-xl"
-            style={user.image ? { backgroundImage: `url(${user.image})` } : {}}
-            aria-hidden="true"
-          >
-            {!user.image ? <UserRound size={46} /> : null}
-          </div>
+          <UserAvatar
+            image={user.image}
+            name={user.name}
+            size="lg"
+            className="shadow-xl"
+          />
           <h1 className="mt-6 text-4xl font-black text-neutral">
             {user.name || "SunCart Shopper"}
           </h1>

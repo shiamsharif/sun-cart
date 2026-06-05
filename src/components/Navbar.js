@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LogOut, Menu, UserRound } from "lucide-react";
+import { LogOut, Menu } from "lucide-react";
 import Logo from "@/components/Logo";
+import UserAvatar from "@/components/UserAvatar";
 import { authClient } from "@/lib/auth-client";
 
 const navLinks = [
@@ -89,15 +90,7 @@ export default function Navbar() {
                 className="tooltip tooltip-bottom hidden items-center gap-2 rounded-full bg-primary/10 p-1 pr-3 text-sm font-bold text-primary sm:flex"
                 data-tip={user.email}
               >
-                <span
-                  className="grid size-9 place-items-center rounded-full bg-secondary bg-cover bg-center text-secondary-content"
-                  style={
-                    user.image ? { backgroundImage: `url(${user.image})` } : {}
-                  }
-                  aria-hidden="true"
-                >
-                  {!user.image ? <UserRound size={18} /> : null}
-                </span>
+                <UserAvatar image={user.image} name={user.name} />
                 <span className="max-w-28 truncate">{user.name || "Profile"}</span>
               </Link>
               <button

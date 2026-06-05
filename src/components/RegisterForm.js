@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { Globe, UserPlus } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { getDisplayImageUrl } from "@/lib/images";
 import ToastMessage from "@/components/ToastMessage";
 
 export default function RegisterForm() {
@@ -29,7 +30,7 @@ export default function RegisterForm() {
     const { error } = await authClient.signUp.email({
       name,
       email,
-      image,
+      image: getDisplayImageUrl(image),
       password,
       callbackURL: redirectTo,
     });
