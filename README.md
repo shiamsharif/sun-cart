@@ -60,6 +60,10 @@ On Vercel, this demo uses `/tmp/suncart.sqlite` and runs Better Auth migrations 
 
 Do not set `SQLITE_DB_PATH=./suncart.sqlite` on Vercel. Serverless functions cannot write to the deployment directory. If you set `SQLITE_DB_PATH` on Vercel at all, it must be a `/tmp/...` path.
 
+OAuth state is stored in an encrypted cookie instead of the database. This avoids `state_mismatch` during Google callback when Vercel routes the sign-in request and callback request to different serverless instances.
+
+If `/api/auth/status` shows `ignoredLocalhostAuthURL: true`, remove `BETTER_AUTH_URL=http://localhost:3000` from Vercel and set it to `https://sun-cart-orpin.vercel.app`.
+
 ## Getting Started
 
 ```bash

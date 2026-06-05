@@ -2,16 +2,29 @@ const productionURL = "https://sun-cart-orpin.vercel.app";
 const localURL = "http://localhost:3000";
 
 export function getAppURL() {
+  const configuredURL =
+    process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_BETTER_AUTH_URL || "";
   const vercelURL = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
     : "";
 
+  if (process.env.VERCEL && isLocalhostURL(configuredURL)) {
+    return vercelURL || productionURL;
+  }
+
   return (
-    process.env.BETTER_AUTH_URL ||
-    process.env.NEXT_PUBLIC_BETTER_AUTH_URL ||
+    configuredURL ||
     vercelURL ||
     (process.env.NODE_ENV === "production" ? productionURL : localURL)
   );
+}
+
+export function getAppOrigin() {
+  try {
+    return new URL(getAppURL()).origin;
+  } catch {
+    return productionURL;
+  }
 }
 
 export function getTrustedOrigins() {
@@ -67,15 +80,29 @@ export function getSqlitePath() {
 
 export function getAuthEnvironmentStatus() {
   const appURL = getAppURL();
-  const appOrigin = getTrustedOrigins()[0] || productionURL;
 
   return {
     appURL,
-    callbackURL: `${appOrigin}/api/auth/callback/google`,
+    callbackURL: `${getAppOrigin()}/api/auth/callback/google`,
     betterAuthSecret: Boolean(process.env.BETTER_AUTH_SECRET),
     googleClientId: Boolean(getGoogleClientId()),
     googleClientSecret: Boolean(getGoogleClientSecret()),
+    ignoredLocalhostAuthURL: Boolean(
+      process.env.VERCEL &&
+        isLocalhostURL(
+          process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_BETTER_AUTH_URL,
+        ),
+    ),
     sqlitePath: getSqlitePath(),
     trustedOrigins: getTrustedOrigins(),
   };
+}
+
+function isLocalhostURL(url) {
+  try {
+    const hostname = new URL(url || "").hostname;
+    return hostname === "localhost" || hostname === "127.0.0.1";
+  } catch {
+    return false;
+  }
 }

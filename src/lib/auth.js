@@ -2,6 +2,7 @@ import { betterAuth } from "better-auth";
 import { nextCookies } from "better-auth/next-js";
 import Database from "better-sqlite3";
 import {
+  getAppOrigin,
   getAppURL,
   getGoogleClientId,
   getGoogleClientSecret,
@@ -27,6 +28,9 @@ export const authOptions = {
   baseURL: getAppURL(),
   trustedOrigins: getTrustedOrigins(),
   database,
+  account: {
+    storeStateStrategy: "cookie",
+  },
   emailAndPassword: {
     enabled: true,
     autoSignIn: true,
@@ -36,6 +40,9 @@ export const authOptions = {
     changeEmail: {
       enabled: false,
     },
+  },
+  onAPIError: {
+    errorURL: `${getAppOrigin()}/login`,
   },
   plugins: [nextCookies()],
 };
