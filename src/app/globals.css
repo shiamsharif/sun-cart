@@ -1,0 +1,90 @@
+@import "tailwindcss";
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "suncart";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: oklch(99% 0.018 105);
+  --color-base-200: oklch(96% 0.044 112);
+  --color-base-300: oklch(90% 0.065 117);
+  --color-base-content: oklch(21% 0.045 142);
+  --color-primary: oklch(56% 0.18 145);
+  --color-primary-content: oklch(98% 0.015 105);
+  --color-secondary: oklch(84% 0.18 91);
+  --color-secondary-content: oklch(24% 0.055 110);
+  --color-accent: oklch(72% 0.16 43);
+  --color-accent-content: oklch(18% 0.05 45);
+  --color-neutral: oklch(25% 0.055 151);
+  --color-neutral-content: oklch(97% 0.02 105);
+  --color-info: oklch(67% 0.12 224);
+  --color-info-content: oklch(98% 0.01 220);
+  --color-success: oklch(62% 0.17 145);
+  --color-success-content: oklch(98% 0.015 140);
+  --color-warning: oklch(80% 0.17 80);
+  --color-warning-content: oklch(22% 0.055 80);
+  --color-error: oklch(61% 0.21 25);
+  --color-error-content: oklch(98% 0.01 25);
+
+  --radius-selector: 0.5rem;
+  --radius-field: 0.45rem;
+  --radius-box: 0.5rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+@import "animate.css";
+
+:root {
+  --sun-ink: #15351e;
+  --sun-leaf: #1f8f45;
+  --sun-lime: #b9d94a;
+  --sun-yellow: #ffd84a;
+  --sun-melon: #ff9c55;
+  --sun-sky: #7ec8d8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(circle at 15% 10%, rgba(255, 216, 74, 0.36), transparent 28rem),
+    radial-gradient(circle at 90% 0%, rgba(126, 200, 216, 0.24), transparent 24rem),
+    linear-gradient(180deg, #fffdf2 0%, #f2ffe8 48%, #fffaf0 100%);
+  color: var(--sun-ink);
+}
+
+button,
+a,
+input,
+textarea {
+  letter-spacing: 0;
+}
+
+.summer-shell {
+  width: min(1180px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.summer-card {
+  border: 1px solid rgba(31, 143, 69, 0.16);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 20px 70px rgba(21, 53, 30, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.sunstripe {
+  background-image:
+    linear-gradient(135deg, rgba(255, 216, 74, 0.46) 0 18%, transparent 18% 32%, rgba(31, 143, 69, 0.18) 32% 50%, transparent 50%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.38));
+  background-size: 160px 160px, 100% 100%;
+}
+
+.product-image {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}

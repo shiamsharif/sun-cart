@@ -1,0 +1,68 @@
+[
+  {
+    "id": "aloe-cooling-gel",
+    "name": "Aloe Cooling Gel",
+    "brand": "SunBloom",
+    "price": 14.99,
+    "rating": 4.8,
+    "stock": 42,
+    "category": "Skin Care",
+    "image": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1200&q=80",
+    "description": "A lightweight aloe gel that calms sun-warmed skin, hydrates quickly, and leaves a fresh non-sticky finish."
+  },
+  {
+    "id": "reef-safe-sunscreen",
+    "name": "Reef Safe Sunscreen SPF 50",
+    "brand": "CoastKind",
+    "price": 21.5,
+    "rating": 4.9,
+    "stock": 35,
+    "category": "Sun Protection",
+    "image": "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=1200&q=80",
+    "description": "Broad-spectrum mineral sunscreen built for long beach days, pool sessions, and bright city errands."
+  },
+  {
+    "id": "woven-beach-tote",
+    "name": "Woven Beach Tote",
+    "brand": "Palm & Shore",
+    "price": 39,
+    "rating": 4.7,
+    "stock": 18,
+    "category": "Beach Gear",
+    "image": "https://images.unsplash.com/photo-1527005980469-e172416c200b?auto=format&fit=crop&w=1200&q=80",
+    "description": "A roomy, structured tote for towels, sunscreen, books, water bottles, and the little extras summer asks for."
+  },
+  {
+    "id": "citrus-hydration-bottle",
+    "name": "Citrus Hydration Bottle",
+    "brand": "DayDrift",
+    "price": 18.25,
+    "rating": 4.6,
+    "stock": 64,
+    "category": "Hydration",
+    "image": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=1200&q=80",
+    "description": "A double-wall bottle that keeps drinks cold during hikes, picnics, workouts, and hot commutes."
+  },
+  {
+    "id": "linen-sun-hat",
+    "name": "Linen Sun Hat",
+    "brand": "Golden Hour Co.",
+    "price": 27.75,
+    "rating": 4.8,
+    "stock": 27,
+    "category": "Accessories",
+    "image": "https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=1200&q=80",
+    "description": "A breathable linen-blend hat with a soft brim for shade that still packs easily in a weekend bag."
+  },
+  {
+    "id": "portable-mist-fan",
+    "name": "Portable Mist Fan",
+    "brand": "BreezeLab",
+    "price": 32,
+    "rating": 4.5,
+    "stock": 21,
+    "category": "Cooling",
+    "image": "https://images.unsplash.com/photo-1525385133512-2f3bdd039054?auto=format&fit=crop&w=1200&q=80",
+    "description": "A compact rechargeable fan with a fine mist setting for outdoor markets, festivals, patios, and travel."
+  }
+]
